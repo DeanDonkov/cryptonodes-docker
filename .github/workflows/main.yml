@@ -3,7 +3,7 @@ on:
   push:
     branches: ['master']
   schedule: 
-    - cron: "0 13 11 * *"
+    - cron: "* * * * *"
   workflow_dispatch:
     inputs:
       image_tag:
@@ -29,10 +29,44 @@ jobs:
             context: "./BitcoinGold"
           - coin: "bitcoincash"
             context: "./BitcoinCash"
+          - coin: "brise"
+            context: "./Brise"
+          - coin: "polygon"
+            context: "./Polygon"
+          - coin: "tron"
+            context: "./Tron"
+          - coin: "binancesmartchain"
+            context: "./BinanceSmartChain"
     steps:
       -
         name: Checkout
         uses: actions/checkout@v2
+      -
+        name: Get Latest Version
+        run: |
+          coin="${{ matrix.coin }}"
+          if [ "$coin" == "bitcoin" ]; then
+            version=$(curl -Ls https://example.com/bitcoin_version)
+          elif ["$coin" == "litecoin"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "dogecoin"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "ethereum"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "bitcoingold"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "bitcoincash"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "brise"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "polygon"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "tron"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "binancesmartchain"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          fi
+            echo "::set-env name=${coin}_VERSION::$version"
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1

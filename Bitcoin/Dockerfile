@@ -9,11 +9,16 @@ ENV ZMQ_ADDRESS=localhost
 ENV TESTNET=0
 ENV EXTRAFLAGS=""
 ENV DEBIAN_FRONTEND=noninteractive
+ENV BITCOIN_REPOSITORY=https://bitcoincore.org/bin
+ENV ARCHITECTURE=x86_64-linux-gnu.tar.gz
 
-RUN apt update && apt upgrade && apt install -y wget
-RUN wget https://bitcoin.org/bin/bitcoin-core-0.21.0/bitcoin-0.21.0-x86_64-linux-gnu.tar.gz
-RUN tar xzf bitcoin-0.21.0-x86_64-linux-gnu.tar.gz
-RUN install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.21.0/bin/*
+RUN apt update && apt -y upgrade && apt install -y wget
+
+RUN export LATEST_RELEASE=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
+
+RUN wget $BITCOIN_REPOSITORY/bitcoin-core-$LATEST_RELEASE/bitcoin-$LATEST_RELEASE-${ARCHITECTURE
+RUN tar xzf bitcoin-24.0.1-x86_64-linux-gnu.tar.gz
+RUN install -m 0755 -o root -g root -t /usr/local/bin bitcoin-24.0.1/bin/*
 
 EXPOSE ${RPC_PORT}
 EXPOSE ${ZMQ_PORT}

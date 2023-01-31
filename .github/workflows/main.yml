@@ -48,6 +48,7 @@ jobs:
           if [ "$coin" == "bitcoin" ]; then
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
             echo "${coin}_${version}"
+             echo "coin={coin}_{version}" >> $GITHUB_STATE
           elif ["$coin" == "litecoin"]; then
             version=$(curl -Ls https://example.com/ethereum_version)
           elif ["$coin" == "dogecoin"]; then
@@ -67,7 +68,7 @@ jobs:
           elif ["$coin" == "binancesmartchain"]; then
             version=$(curl -Ls https://example.com/ethereum_version)
           fi
-            echo "${coin}_${version}" >> $GITHUB_ENV
+            echo "coin={coin}_{version}" >> $GITHUB_STATE
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1

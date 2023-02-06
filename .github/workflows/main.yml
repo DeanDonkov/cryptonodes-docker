@@ -49,24 +49,6 @@ jobs:
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
             echo "${coin}_${version}"
             echo "coin={coin}_{version}" >> $GITHUB_STATE
-          elif ["$coin" == "litecoin"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
-          elif ["$coin" == "dogecoin"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
-          elif ["$coin" == "ethereum"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
-          elif ["$coin" == "bitcoingold"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
-          elif ["$coin" == "bitcoincash"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
-          elif ["$coin" == "brise"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
-          elif ["$coin" == "polygon"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
-          elif ["$coin" == "tron"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
-          elif ["$coin" == "binancesmartchain"]; then
-            version=$(curl -Ls https://example.com/ethereum_version)
           fi
             echo "coin={version}" >> $GITHUB_STATE
       -
@@ -75,6 +57,10 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      -
+        name: build
+        run: |
+          docker build -t . 
       -
         name: Login to DockerHub
         uses: docker/login-action@v1

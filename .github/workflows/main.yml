@@ -68,7 +68,7 @@ jobs:
           elif ["$coin" == "binancesmartchain"]; then
             version=$(curl -Ls https://example.com/ethereum_version)
           fi
-            echo "coin={coin}_{version}" >> $GITHUB_STATE
+            echo "coin={version}" >> $GITHUB_STATE
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -87,6 +87,8 @@ jobs:
         with:
           context: ${{ matrix.context }}
           push: true
+          build-args: |
+            ""
           tags: gostartups/${{ matrix.coin }}-core:latest
       - 
         name: Build and push with Tag

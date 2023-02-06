@@ -31,7 +31,7 @@ jobs:
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
             echo "${version}"
           fi
-            echo "action_state={version}" >> $GITHUB_ENV
+            echo "action_state=${version}" >> $GITHUB_ENV
 
       -
         name: Set up QEMU

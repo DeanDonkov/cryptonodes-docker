@@ -44,7 +44,7 @@ jobs:
       -
         name: Get Latest Version
         run: |
-        coin="${{ matrix.coin }}"
+          coin="${{ matrix.coin }}"
           if [ "$coin" == "bitcoin" ]; then
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
           elif ["$coin" == "litecoin"]; then

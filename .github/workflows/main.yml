@@ -31,6 +31,7 @@ jobs:
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
             echo "${version}"
             echo "bitcoin={version}" >> $GITHUB_STATE
+            echo "::set-env name=FOO::123"
           fi
             echo "bitcoin={version}" >> $GITHUB_STATE
       -
@@ -53,7 +54,7 @@ jobs:
           push: true
           tags: deandonkov/${{ matrix.coin }}-core:latest
           build-args: |
-            BITCOIN_VERSION=${{ github.state_bitcoin }}
+            BITCOIN_VERSION=${{ echo $FOO }}
       - 
         name: Build and push with Tag
         uses: docker/build-push-action@v2

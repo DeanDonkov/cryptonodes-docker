@@ -29,7 +29,7 @@ jobs:
           coin="${{ matrix.coin }}"
           if [ "$coin" == "bitcoin" ]; then
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
-            echo "${coin}_${version}"
+            echo "${version}"
             echo "bitcoin={version}" >> $GITHUB_STATE
           fi
             echo "bitcoin={version}" >> $GITHUB_STATE

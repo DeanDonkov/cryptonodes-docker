@@ -19,6 +19,24 @@ jobs:
         include:
           - coin: "bitcoin"
             context: "./Bitcoin"
+          - coin: "litecoin"
+            context: "./Litecoin"
+          - coin: "dogecoin"
+            context: "./Dogecoin"
+          - coin: "ethereum"
+            context: "./Ethereum"
+          - coin: "bitcoingold"
+            context: "./BitcoinGold"
+          - coin: "bitcoincash"
+            context: "./BitcoinCash"
+          - coin: "brise"
+            context: "./Brise"
+          - coin: "polygon"
+            context: "./Polygon"
+          - coin: "tron"
+            context: "./Tron"
+          - coin: "binancesmartchain"
+            context: "./BinanceSmartChain"
     steps:
       -
         name: Checkout
@@ -26,10 +44,27 @@ jobs:
       -
         name: Get Latest Version
         run: |
-          coin="${{ matrix.coin }}"
+        coin="${{ matrix.coin }}"
           if [ "$coin" == "bitcoin" ]; then
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
-            echo "${version}"
+          elif ["$coin" == "litecoin"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "dogecoin"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "ethereum"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "bitcoingold"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "bitcoincash"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "brise"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "polygon"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "tron"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
+          elif ["$coin" == "binancesmartchain"]; then
+            version=$(curl -Ls https://example.com/ethereum_version)
           fi
             echo "action_state=${version}" >> $GITHUB_ENV
 

@@ -31,9 +31,10 @@ jobs:
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
             echo "${version}"
             echo "bitcoin={version}" >> $GITHUB_STATE
-            echo "::set-env name=FOO::123"
           fi
             echo "bitcoin={version}" >> $GITHUB_STATE
+            echo "::set-env name=FOO::123"
+
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1

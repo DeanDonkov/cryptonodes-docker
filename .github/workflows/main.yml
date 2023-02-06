@@ -30,9 +30,9 @@ jobs:
           if [ "$coin" == "bitcoin" ]; then
             version=$(curl https://api.github.com/repos/bitcoin/bitcoin/releases/latest |  python3 -c "import sys, json; print(json.load(sys.stdin)['tag_name'].replace('v', ''))")
             echo "${coin}_${version}"
-            echo "coin={coin}_{version}" >> $GITHUB_STATE
+            echo "bitcoin={version}" >> $GITHUB_STATE
           fi
-            echo "coin={version}" >> $GITHUB_STATE
+            echo "bitcoin={version}" >> $GITHUB_STATE
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -53,7 +53,7 @@ jobs:
           push: true
           tags: deandonkov/${{ matrix.coin }}-core:latest
           build-args: |
-            "BITCOIN_VERSION=${{ secrets.coin }}"
+            "BITCOIN_VERSION=${{ env.bitcoin }}"
       - 
         name: Build and push with Tag
         uses: docker/build-push-action@v2

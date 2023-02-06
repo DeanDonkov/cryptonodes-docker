@@ -10,8 +10,8 @@ ENV TESTNET=0
 ENV EXTRAFLAGS=""
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG BITCOIN_VERSION
-ENV BITCOIN_VERSION ${BITCOIN}
+ARG NODE_VERSION
+ENV BITCOIN_VERSION ${NODE_VERSION}
 
 RUN apt update && apt upgrade -y && apt install -y wget
 RUN wget https://bitcoincore.org/bin/bitcoin-core-${BITCOIN_VERSION}/bitcoin-${BITCOIN_VERSION}-x86_64-linux-gnu.tar.gz

@@ -51,9 +51,9 @@ jobs:
         with:
           context: ${{ matrix.context }}
           push: true
-          build-args: |
-            ""
           tags: deandonkov/${{ matrix.coin }}-core:latest
+          build-args: |
+            "BITCOIN_VERSION=${{ secrets.coin }}"
       - 
         name: Build and push with Tag
         uses: docker/build-push-action@v2

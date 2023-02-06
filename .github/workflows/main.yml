@@ -53,7 +53,7 @@ jobs:
           push: true
           tags: deandonkov/${{ matrix.coin }}-core:latest
           build-args: |
-            BITCOIN_VERSION=${{ STATE.bitcoin }}
+            BITCOIN_VERSION=${{ GITHUB_STATE.bitcoin }}
       - 
         name: Build and push with Tag
         uses: docker/build-push-action@v2
